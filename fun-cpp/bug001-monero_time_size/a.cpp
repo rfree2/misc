@@ -13,7 +13,7 @@ typedef std::lock_guard<std::mutex> t_lg; // lock guard // TODO move to library
 std::mutex g_using_localtime; // TODO move to library, to have all thread see it
 std::string get_current_time() {
   std::chrono::high_resolution_clock::time_point now = std::chrono::high_resolution_clock::now();
-  time_t time_now = std::chrono::high_resolution_clock::to_time_t(now);
+  time_t time_now = std::chrono::system_clock::to_time_t(now);
   std::chrono::high_resolution_clock::duration duration = now.time_since_epoch();
   int64_t micro = std::chrono::duration_cast<std::chrono::microseconds>(duration).count();
   struct tm * date=NULL;
