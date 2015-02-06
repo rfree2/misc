@@ -64,7 +64,7 @@ int main() {
 	t_safe len = std::min( chunksize_good , lenall);
 	int v=0;
 	if (len>0) v=1;
-	if (len < std::numeric_limits<size_t>::max()) v=2;
+	if (len < std::numeric_limits<long signed int>::max()) v=2;
 	std::cout << get_current_time() << ":" << v << std::endl ;
 }
 
