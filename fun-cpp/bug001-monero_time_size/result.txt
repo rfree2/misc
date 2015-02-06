@@ -1,0 +1,53 @@
+
+commit ef34f89247db1d1a14228ee14e099afa758a93b6 
+on mac:
+Ashcan:/tmp mikeash$ clang++ -Wall -Wextra -pedantic test.cpp
+test.cpp:16:21: error: no member named 'to_time_t' in
+      'std::__1::chrono::steady_clock'; did you mean
+      'std::chrono::system_clock::to_time_t'?
+  time_t time_now = std::chrono::high_resolution_clock::to_time_t(now);
+                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                    std::chrono::system_clock::to_time_t
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/chrono:925:23: note: 
+      'std::chrono::system_clock::to_time_t' declared here
+    static time_t     to_time_t  (const time_point& __t) _NOEXCEPT;
+                      ^
+test.cpp:16:67: error: no viable conversion from 'time_point<class
+      std::__1::chrono::steady_clock, duration<[...], ratio<[...],
+      1000000000>>>' to 'const time_point<class
+      std::__1::chrono::system_clock, duration<[...], ratio<[...],
+      1000000>>>'
+  time_t time_now = std::chrono::high_resolution_clock::to_time_t(now);
+                                                                  ^~~
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/chrono:750:29: note: 
+      candidate constructor (the implicit copy constructor) not viable: no known
+      conversion from 'std::chrono::high_resolution_clock::time_point' (aka
+      'time_point<std::__1::chrono::steady_clock, duration>') to 'const
+      std::__1::chrono::time_point<std::__1::chrono::system_clock,
+      std::__1::chrono::duration<long long, std::__1::ratio<1, 1000000> > > &'
+      for 1st argument
+class _LIBCPP_TYPE_VIS_ONLY time_point
+                            ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/chrono:769:5: note: 
+      candidate template ignored: could not match
+      'std::__1::chrono::system_clock' against 'std::__1::chrono::steady_clock'
+    time_point(const time_point<clock, _Duration2>& t,
+    ^
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/chrono:925:53: note: 
+      passing argument to parameter '__t' here
+    static time_t     to_time_t  (const time_point& __t) _NOEXCEPT;
+                                                    ^
+test.cpp:31:17: warning: 'long long' is a C++11 extension [-Wc++11-long-long]
+        typedef long long signed int t_safe;
+                ^
+test.cpp:43:2: warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+test.cpp:41:17: warning: comparison of integers of different signs: 't_safe'
+      (aka 'long long') and 'type' (aka 'unsigned long') [-Wsign-compare]
+        if (len < std::numeric_limits<size_t>::max()) v=2;
+            ~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3 warnings and 2 errors generated.
+
+
+
