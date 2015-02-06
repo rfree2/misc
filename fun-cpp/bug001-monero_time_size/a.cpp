@@ -24,6 +24,7 @@ std::string get_current_time() {
   if (date) std::strftime(date_buff, sizeof(date_buff), "%d-%b-%Y %H:%M:%S.", date); else date_buff[0]='\0';
   std::stringstream stream;
   stream << date_buff << std::setfill('0') << std::setw(6) << (micro%1000000); // 6 because microseconds !
+	// --> string D-M-Y hh:mm:ss.micro
   return stream.str();
 }
 int main() { 
